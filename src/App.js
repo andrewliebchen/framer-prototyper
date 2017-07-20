@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import dotProp from 'dot-prop-immutable';
 import { push } from '@immutable-array/push';
+import { splice } from '@immutable-array/splice';
 import _ from 'lodash';
 import classNames from 'classnames';
 import AceEditor from 'react-ace';
-import { Plus, Icon } from 'reline';
+import { Icon } from 'reline';
 import Frame from 'react-frame-component';
 import ReactInterval from 'react-interval';
 
@@ -35,7 +36,13 @@ const Editor = (props) =>
     <div 
       className="EditorHeader"
       onClick={props.toggle}>
-      {props.editor.title}
+      <span className="EditorTitle">{props.editor.title}</span>
+      <Icon 
+        name="x" 
+        className="EditorAction" 
+        size={12} 
+        strokeWidth={2}
+        onClick={props.handleDelete} />
     </div>
     <div className="EditorCode">
       <AceEditor
@@ -76,7 +83,8 @@ class Preview extends Component {
           className="PreviewControl"
           name={this.state.playing ? 'diamond' : 'triangle'}
           onClick={() => this.setState({playing: !this.state.playing})}
-          right />
+          right
+          strokeWidth={2} />
         <ReactInterval 
           timeout={2000} 
           enabled={this.state.playing}
@@ -116,24 +124,36 @@ class App extends Component {
   }
 
   handleToggleEditor(title) {
-    const index = _.findIndex(this.state.editors, { title: title });
     this.setState(dotProp.toggle(
       this.state, 
-      `editors.${index}.active`
+      `editors.${this.editorIndex(title)}.active`
     ));
   }
 
   handleEditorChange(title, value) {
-    const index = _.findIndex(this.state.editors, { title: title });
     this.setState(dotProp.set(
       this.state, 
-      `editors.${index}.code`, 
+      `editors.${this.editorIndex(title)}.code`, 
       value
     ));
   }
 
+  handleEditorDelete(title, event) {
+    event.stopPropagation();
+    this.setState({
+      editors: splice(
+        this.state.editors, 
+        this.editorIndex(title),
+        1
+      )
+    });
+  }
+
+  editorIndex(title) {
+    return _.findIndex(this.state.editors, { title: title });
+  }
+
   addEditor() {
-    console.log('hi')
     this.setState({
       editors: push(this.state.editors, {
         title: 'New',
@@ -161,10 +181,13 @@ class App extends Component {
               editor={editor}
               toggle={this.handleToggleEditor.bind(this, editor.title)}
               handleChange={this.handleEditorChange.bind(this, editor.title)}
+              handleDelete={this.handleEditorDelete.bind(this, editor.title)}
               key={editor.title} />
           )}
-          <Plus
+          <Icon
+            name="plus"
             onClick={this.addEditor.bind(this)} 
+            strokeWidth={2}
             style={{
               position: 'absolute',
               right: '1em',
