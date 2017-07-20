@@ -2,19 +2,44 @@ import React, { Component } from 'react';
 import dotProp from 'dot-prop-immutable';
 import _ from 'lodash';
 import classNames from 'classnames';
+import AceEditor from 'react-ace';
 import { Plus } from 'reline';
 
 import './App.css';
+import 'brace/mode/jsx';
+import 'brace/theme/monokai';
 
 const Editor = (props) => 
   <div 
     className={classNames({
       'Editor': true,
       'isActive': props.editor.active,
-    })}
-    onClick={props.toggle}>
-    <div className="EditorHeader">{props.editor.title}</div>
-    {props.editor.active && <div className="EditorCode" />}
+    })}>
+    <div 
+      className="EditorHeader"
+      onClick={props.toggle}>
+      {props.editor.title}
+    </div>
+    <div className="EditorCode">
+      <AceEditor
+        mode="jsx"
+        theme="monokai"
+        name={_.camelCase(props.editor.title)}
+        defaultValue={props.editor.code}
+        onChange={() => console.log('hi')}
+        width="40vw"
+        height="50vh"
+        tabSize={2}
+        focus
+        editorProps={{
+          $blockScrolling: true
+        }}
+        style={{
+          fontSize: '16px',
+          fontFamily: 'SF Mono',
+          lineHeight: '22px',
+        }}/>
+    </div>
   </div>
 
 class App extends Component {
@@ -25,9 +50,11 @@ class App extends Component {
         {
           title: 'code1',
           active: true,
+          code: '<div>Hello world!</div>'
         }, {
           title: 'code2',
           active: false,
+          code: '<div>Goodbye world!</div>'
         },
       ],
     };

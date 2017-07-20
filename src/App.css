@@ -27,9 +27,15 @@
   color: white;
   background-color: black;
   padding: 0 1em;
+  cursor: pointer;
 }
 
 .EditorCode {
   height: 50vh;
   background-color: #333;
+  display: none;
+}
+
+.isActive .EditorCode {
+  display: block;
 }
