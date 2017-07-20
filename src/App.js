@@ -3,7 +3,7 @@ import dotProp from 'dot-prop-immutable';
 import _ from 'lodash';
 import classNames from 'classnames';
 import AceEditor from 'react-ace';
-import { Plus } from 'reline';
+import { Plus, Icon } from 'reline';
 import Frame from 'react-frame-component';
 import ReactInterval from 'react-interval';
 
@@ -62,22 +62,27 @@ class Preview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: Date.now()
+      timer: Date.now(),
+      playing: false,
     };
   }
 
   render() {
     // Maybe use shouldComponentUpdate and interval to prevent flashes
     return (
-      <div>
+      <div className="Preview">
+        <Icon 
+          className="PreviewControl"
+          name={this.state.playing ? 'diamond' : 'triangle'}
+          onClick={() => this.setState({playing: !this.state.playing})}
+          right />
         <ReactInterval 
           timeout={2000} 
-          enabled={true}
+          enabled={this.state.playing}
           callback={() => this.setState({timer: Date.now()})} />
         <Frame key={this.state.timer}
-          className="Preview" 
+          className="PreviewFrame" 
           initialContent={framerContent(this.props.code)}> 
-
           <span/>
         </Frame>
       </div>
@@ -117,7 +122,6 @@ class App extends Component {
 
   handleEditorChange(title, value) {
     const index = _.findIndex(this.state.editors, { title: title });
-    const editor = this.state.editors[index];
     this.setState(dotProp.set(
       this.state, 
       `editors.${index}.code`, 

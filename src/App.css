@@ -41,8 +41,20 @@
 }
 
 .Preview {
+
+}
+
+.PreviewFrame {
   position: fixed;
   width: 100vw;
   height: 100vh;
   border: 0;
+}
+
+.PreviewControl {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  cursor: pointer;
+  z-index: 1;
 }
