@@ -1,0 +1,22 @@
+{
+  "name": "framer-prototyper",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "classnames": "^2.2.5",
+    "dot-prop-immutable": "^1.3.1",
+    "lodash": "^4.17.4",
+    "react-scripts": "1.0.10",
+    "reline": "^1.0.0-beta.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
