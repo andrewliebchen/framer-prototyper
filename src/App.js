@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import dotProp from 'dot-prop-immutable';
+import { push } from '@immutable-array/push';
 import _ from 'lodash';
 import classNames from 'classnames';
 import AceEditor from 'react-ace';
@@ -100,11 +101,15 @@ class App extends Component {
         {
           title: 'code1',
           active: true,
-          code: 'const layerA = new Layer({x: Align.center});',
+          code: `const layerA = new Layer({
+            x: Align.center,
+            y: Align.center,
+            backgroundColor: new Color('blue').alpha(0.5),
+          });`,
         }, {
           title: 'code2',
           active: false,
-          code: '<div>Goodbye world!</div>',
+          code: 'console.log("Howdy!")',
         },
       ],
     };
@@ -112,11 +117,9 @@ class App extends Component {
 
   handleToggleEditor(title) {
     const index = _.findIndex(this.state.editors, { title: title });
-    const editor = this.state.editors[index];
-    this.setState(dotProp.set(
+    this.setState(dotProp.toggle(
       this.state, 
-      `editors.${index}.active`, 
-      !editor.active
+      `editors.${index}.active`
     ));
   }
 
@@ -130,13 +133,28 @@ class App extends Component {
   }
 
   addEditor() {
+    console.log('hi')
+    this.setState({
+      editors: push(this.state.editors, {
+        title: 'New',
+        active: true,
+        code: '',
+      })
+    });
+  }
 
+  prototypeCode() {
+    let code = this.state.editors.map((editor) => {
+      return editor.code;
+    }).join('\n');
+
+    return code;
   }
 
   render() {
     return (
       <div className="App">
-        <Preview code={this.state.editors[0].code} /> 
+        <Preview code={this.prototypeCode()} /> 
         <div className="Editors">
           {this.state.editors.map((editor, i) => 
             <Editor 
