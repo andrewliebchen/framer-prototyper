@@ -39,3 +39,10 @@
 .isActive .EditorCode {
   display: block;
 }
+
+.Preview {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  border: 0;
+}

@@ -4,10 +4,26 @@ import _ from 'lodash';
 import classNames from 'classnames';
 import AceEditor from 'react-ace';
 import { Plus } from 'reline';
+import Frame from 'react-frame-component';
+import ReactInterval from 'react-interval';
 
 import './App.css';
 import 'brace/mode/jsx';
 import 'brace/theme/monokai';
+
+const framerContent = (code) => {
+  return `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <script src="//builds.framerjs.com/version/latest/framer.js"></script>
+      </head>
+      <body>
+        <script>${code}</script>
+      </body>
+    </html>
+  `;
+}
 
 const Editor = (props) => 
   <div 
@@ -25,8 +41,8 @@ const Editor = (props) =>
         mode="jsx"
         theme="monokai"
         name={_.camelCase(props.editor.title)}
-        defaultValue={props.editor.code}
-        onChange={() => console.log('hi')}
+        value={props.editor.code}
+        onChange={(event) => props.handleChange(event)}
         width="40vw"
         height="50vh"
         tabSize={2}
@@ -42,6 +58,35 @@ const Editor = (props) =>
     </div>
   </div>
 
+class Preview extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      timer: Date.now()
+    };
+  }
+
+  render() {
+    // Maybe use shouldComponentUpdate and interval to prevent flashes
+    return (
+      <div>
+        <ReactInterval 
+          timeout={2000} 
+          enabled={true}
+          callback={() => this.setState({timer: Date.now()})} />
+        <Frame key={this.state.timer}
+          className="Preview" 
+          initialContent={framerContent(this.props.code)}> 
+
+          <span/>
+        </Frame>
+      </div>
+    );
+  }
+} 
+  
+  
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -50,11 +95,11 @@ class App extends Component {
         {
           title: 'code1',
           active: true,
-          code: '<div>Hello world!</div>'
+          code: 'const layerA = new Layer({x: Align.center});',
         }, {
           title: 'code2',
           active: false,
-          code: '<div>Goodbye world!</div>'
+          code: '<div>Goodbye world!</div>',
         },
       ],
     };
@@ -63,7 +108,21 @@ class App extends Component {
   handleToggleEditor(title) {
     const index = _.findIndex(this.state.editors, { title: title });
     const editor = this.state.editors[index];
-    this.setState(dotProp.set(this.state, `editors.${index}.active`, !editor.active));
+    this.setState(dotProp.set(
+      this.state, 
+      `editors.${index}.active`, 
+      !editor.active
+    ));
+  }
+
+  handleEditorChange(title, value) {
+    const index = _.findIndex(this.state.editors, { title: title });
+    const editor = this.state.editors[index];
+    this.setState(dotProp.set(
+      this.state, 
+      `editors.${index}.code`, 
+      value
+    ));
   }
 
   addEditor() {
@@ -73,12 +132,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="Preview"></div>
+        <Preview code={this.state.editors[0].code} /> 
         <div className="Editors">
           {this.state.editors.map((editor, i) => 
             <Editor 
               editor={editor}
               toggle={this.handleToggleEditor.bind(this, editor.title)}
+              handleChange={this.handleEditorChange.bind(this, editor.title)}
               key={editor.title} />
           )}
           <Plus
