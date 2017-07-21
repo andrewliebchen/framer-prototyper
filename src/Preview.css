@@ -1,0 +1,63 @@
+.Preview {
+  width: 100vw;
+  height: 100vh;
+}
+
+.PreviewBrowser {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  border: 2px solid #ccc;
+  border-radius: 0 0 2px 2px;
+}
+
+.PreviewBrowserHeader {
+  height: 2em;
+  border: inherit;
+  position: absolute;
+  top: -2em;
+  left: -2px;
+  right: -2px;
+  background-color: #f0f0f0;
+  border-bottom-width: 1px;
+  border-radius: 2px 2px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.PreviewBrowserDot {
+  height: 1em;
+  width: 1em;
+  background-color: white;
+  margin-left: 0.5em;
+  border-radius: 0.5em;
+}
+
+.PreviewName {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  font-size: 0.8em;
+  font-weight: 500;
+  color: #999;
+}
+
+.PreviewFrame {
+  border: 0;
+  width: 80vh;
+  height: 60vh;
+}
+
+.PreviewControls {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+
+.PreviewControl {
+  cursor: pointer;
+  z-index: 1;
+  margin-left: 0.5em;
+}
