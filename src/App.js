@@ -5,8 +5,8 @@ import { splice } from '@immutable-array/splice';
 import _ from 'lodash';
 import { Icon } from 'reline';
 
-import Editor from './Editor';
-import Preview from './Preview';
+import Editor from './components/Editor';
+import Preview from './components/Preview';
 
 import { initialState } from './data';
 
@@ -63,7 +63,7 @@ class App extends Component {
   addEditor() {
     this.setState({
       editors: push(this.state.editors, {
-        title: 'New',
+        title: Date.now(),
         active: true,
         code: '',
       })
@@ -92,17 +92,14 @@ class App extends Component {
               handleChange={this.handleEditorChange.bind(this, editor.title)}
               handleDelete={this.handleEditorDelete.bind(this, editor.title)}
               handleTitleChange={this.handleTitleChange.bind(this, editor.title)}
+              canDelete={this.state.editors.length > 1}
               key={editor.title} />
           )}
           <Icon
+            className="EditorsAdd"
             name="plus"
             onClick={this.addEditor.bind(this)} 
-            strokeWidth={2}
-            style={{
-              position: 'absolute',
-              right: '1em',
-              bottom: '1em',
-            }}/>
+            strokeWidth={2} />
         </div>
       </div>
     );

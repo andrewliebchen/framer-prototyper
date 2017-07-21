@@ -24,12 +24,13 @@ const Editor = (props) =>
         html={props.editor.title}
         className="EditorTitle"
         onChange={(event) => props.handleTitleChange(event)} />
-      <Icon 
-        name="x" 
-        className="EditorAction" 
-        size={12} 
-        strokeWidth={2}
-        onClick={props.handleDelete} />
+      {props.canDelete &&
+        <Icon 
+          name="x" 
+          className="EditorAction" 
+          size={12} 
+          strokeWidth={2}
+          onClick={props.handleDelete} />}
     </div>
     <div className="EditorCode">
       <AceEditor
@@ -57,6 +58,7 @@ Editor.propTypes = {
   handleTitleChange: PropTypes.func,
   handleChange: PropTypes.func,
   handleDelete: PropTypes.func,
+  canDelete: PropTypes.bool,
 };
 
 export default Editor;

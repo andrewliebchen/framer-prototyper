@@ -2,5 +2,18 @@
   position: fixed;
   display: flex;
   bottom: 0;
+  padding-right: 3em;
   width: 100vw;
+}
+
+.EditorsAdd {
+  height: 2em;
+  width: 2em;
+  padding: 0.5em;
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+  cursor: pointer;
+  border-radius: 1em;
+  background-color: white;
 }
