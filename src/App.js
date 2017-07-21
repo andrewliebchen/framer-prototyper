@@ -3,8 +3,8 @@ import dotProp from 'dot-prop-immutable';
 import { push } from '@immutable-array/push';
 import { splice } from '@immutable-array/splice';
 import _ from 'lodash';
-import { Icon } from 'reline';
 
+import LinkIcon from './components/LinkIcon';
 import Editor from './components/Editor';
 import Preview from './components/Preview';
 
@@ -95,11 +95,10 @@ class App extends Component {
               canDelete={this.state.editors.length > 1}
               key={editor.title} />
           )}
-          <Icon
+          <LinkIcon
             className="EditorsAdd"
             name="plus"
-            onClick={this.addEditor.bind(this)} 
-            strokeWidth={2} />
+            onClick={this.addEditor.bind(this)} />
         </div>
       </div>
     );

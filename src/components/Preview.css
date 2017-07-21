@@ -54,10 +54,10 @@
   position: absolute;
   top: 1em;
   right: 1em;
+  display: flex;
+  z-index: 1;
 }
 
 .PreviewControl {
-  cursor: pointer;
-  z-index: 1;
-  margin-left: 1em;
+  margin-left: 0.25em;
 }

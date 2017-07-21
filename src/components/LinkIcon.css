@@ -1,0 +1,17 @@
+.LinkIcon {
+  height: 2em;
+  width: 2em;
+  padding: 0.5em;
+  cursor: pointer;
+  border-radius: 1em;
+  background-color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.LinkIcon:hover {
+  background-color: black;
+  color: white;
+}

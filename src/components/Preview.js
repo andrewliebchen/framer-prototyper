@@ -3,7 +3,8 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import ReactInterval from 'react-interval';
 import Frame from 'react-frame-component';
-import { Icon } from 'reline';
+
+import LinkIcon from './LinkIcon';
 
 import './Preview.css';
 
@@ -39,16 +40,14 @@ class Preview extends Component {
           enabled={this.state.playing}
           callback={() => this.setState({timer: Date.now()})} />
         <div className="PreviewControls">
-          <Icon
+          <LinkIcon
             className="PreviewControl"
-            name="burger"
-            strokeWidth={2} />
-          <Icon 
+            name="burger" />
+          <LinkIcon 
             className="PreviewControl"
             name={this.state.playing ? 'diamond' : 'triangle'}
             onClick={() => this.setState({playing: !this.state.playing})}
-            right
-            strokeWidth={2} />
+            right />
         </div>
         <div className="PreviewBrowser">
           <div className="PreviewBrowserHeader">
