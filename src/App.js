@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Provider } from 'rebass';
-import { Flex, Box } from 'reflexbox'
+import { Flex, Box } from 'reflexbox';
 
 import Editor from './components/Editor';
 import Preview from './components/Preview';
@@ -14,6 +14,7 @@ class App extends Component {
     super(props);
     this.state = {
       ...initialState,
+      syntax: 'coffeescript',
     };
   }
 
@@ -23,8 +24,9 @@ class App extends Component {
         <Flex className="App">
           <Box auto>
             <Editor 
-              code={this.state.code}
-              handleChange={(newCode) => this.setState({ code: newCode })} />
+              handleChange={(newCode) => this.setState({ code: newCode })}
+              handleSyntaxChange={(newSyntax) => this.setState({ syntax: newSyntax })} 
+              {...this.state} />
           </Box>
           <Box auto>
             <Preview code={this.state.code} /> 

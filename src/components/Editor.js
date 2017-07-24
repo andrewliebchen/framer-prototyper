@@ -1,14 +1,34 @@
 import React from 'react';
 import AceEditor from 'react-ace';
 import PropTypes from 'prop-types';
+import { Flex } from 'reflexbox';
+import classnames from 'classnames';
 
 import './Editor.css';
 
 import 'brace/mode/jsx';
 import 'brace/theme/monokai';
 
+const headerHeight = 60;
+const syntaxes = ['coffeescript', 'javascript'];
+
 const Editor = (props) => 
   <div className="Editor">
+    <Flex 
+      className="EditorHeader"
+      align="center"
+      style={{ height: headerHeight }}>
+      <div className="Toggle">
+        {syntaxes.map((syntax, i) => 
+          <button 
+            key={i}
+            className={classnames({'isActive': props.syntax === syntax})}
+            onClick={() => props.handleSyntaxChange(syntax)}>
+            {syntax}
+          </button>
+        )}
+      </div>
+    </Flex>
     <div className="EditorCode">
       <AceEditor
         mode="jsx"
@@ -17,7 +37,7 @@ const Editor = (props) =>
         value={props.code}
         onChange={(event) => props.handleChange(event)}
         width="50vw"
-        height="100vh"
+        height={`${window.innerHeight - headerHeight}px`}
         tabSize={2}
         editorProps={{
           $blockScrolling: true
@@ -32,7 +52,9 @@ const Editor = (props) =>
 
 Editor.propTypes = {
   code: PropTypes.string.isRequired,
+  syntax: PropTypes.oneOf(['coffeescript', 'javascript']).isRequired,
   handleChange: PropTypes.func,
+  handleSyntaxChange: PropTypes.func,
 };
 
 export default Editor;
