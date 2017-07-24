@@ -1,5 +1,9 @@
 export const initialState = {
   name: 'Prototype_1',
+  size: {
+    width: 1024,
+    height: 768,
+  },
   editors: [
     {
       title: 'code1',

@@ -6,12 +6,11 @@ import './LinkIcon.css';
 
 const LinkIcon = (props) => 
   <div 
-    className={`LinkIcon ${props.className && props.className}`}>
+    className={`LinkIcon ${props.className && props.className}`}
+    onClick={props.onClick}>
     <Icon
       name={props.name}
-      onClick={props.onClick} 
       strokeWidth={2} />
-      
   </div>
 
 LinkIcon.propTypes = {
@@ -30,7 +29,7 @@ LinkIcon.propTypes = {
   down: PropTypes.bool,
   left: PropTypes.bool,
   right: PropTypes.bool,
-  className: PropTypes.className,
+  className: PropTypes.string,
   onClick: PropTypes.func,
 };
 

@@ -11,3 +11,8 @@
   bottom: 0.5em;
   right: 0.5em;
 }
+
+.Overlays {
+  position: fixed;
+  z-index: 99;
+}

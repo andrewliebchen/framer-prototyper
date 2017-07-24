@@ -3,6 +3,7 @@ import dotProp from 'dot-prop-immutable';
 import { push } from '@immutable-array/push';
 import { splice } from '@immutable-array/splice';
 import _ from 'lodash';
+import { Provider, Input, Overlay } from 'rebass';
 
 import LinkIcon from './components/LinkIcon';
 import Editor from './components/Editor';
@@ -12,11 +13,25 @@ import { initialState } from './data';
 
 import './App.css';
 
+const theme = {
+  radius: 0,
+  space: [
+    8,
+    12,
+    16,
+    24,
+    32,
+    64,
+    128,
+  ],
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ...initialState,
+      settings: false,
     };
   }
 
@@ -80,10 +95,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <Provider className="App" theme={theme}>
         <Preview 
           code={this.prototypeCode()}
-          name={this.state.name} /> 
+          name={this.state.name}
+          size={this.state.size}
+          settings={() => this.setState({ settings: !this.state.settings })} /> 
         <div className="Editors">
           {this.state.editors.map((editor, i) => 
             <Editor 
@@ -100,7 +117,29 @@ class App extends Component {
             name="plus"
             onClick={this.addEditor.bind(this)} />
         </div>
-      </div>
+        <div className="Overlays">
+          {this.state.settings &&
+            <Overlay w={0.5}>
+              <Input
+                label="Name"
+                name="name"
+                placeholder="Placeholder"
+                value={this.state.name}/>
+              <Input
+                type="number"
+                label="Browser width"
+                name="width"
+                placeholder="Placeholder"
+                value={this.state.size.width}/>
+              <Input
+                type="number"
+                label="Browser height"
+                name="height"
+                placeholder="Placeholder"
+                value={this.state.size.height}/>
+          </Overlay>}
+        </div>
+      </Provider>
     );
   }
 }
