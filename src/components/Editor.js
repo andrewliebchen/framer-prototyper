@@ -10,7 +10,7 @@ import 'brace/mode/jsx';
 import 'brace/theme/monokai';
 
 const headerHeight = 60;
-const syntaxes = ['coffeescript', 'javascript'];
+const syntaxes = ['Coffeescript', 'Javascript'];
 
 const Editor = (props) => 
   <div className="Editor">
@@ -52,7 +52,7 @@ const Editor = (props) =>
 
 Editor.propTypes = {
   code: PropTypes.string.isRequired,
-  syntax: PropTypes.oneOf(['coffeescript', 'javascript']).isRequired,
+  syntax: PropTypes.oneOf(['Coffeescript', 'Javascript']).isRequired,
   handleChange: PropTypes.func,
   handleSyntaxChange: PropTypes.func,
 };
