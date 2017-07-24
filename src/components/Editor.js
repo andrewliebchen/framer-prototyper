@@ -1,7 +1,7 @@
 import React from 'react';
 import AceEditor from 'react-ace';
 import PropTypes from 'prop-types';
-import { Flex } from 'reflexbox';
+import { Flex, Box } from 'reflexbox';
 import classnames from 'classnames';
 
 import './Editor.css';
@@ -18,7 +18,7 @@ const Editor = (props) =>
       className="EditorHeader"
       align="center"
       style={{ height: headerHeight }}>
-      <div className="Toggle">
+      <Box className="Toggle">
         {syntaxes.map((syntax, i) => 
           <button 
             key={i}
@@ -27,7 +27,10 @@ const Editor = (props) =>
             {syntax}
           </button>
         )}
-      </div>
+      </Box>
+      <Box style={{marginLeft: 'auto'}}>
+        <button>Share</button>
+      </Box>
     </Flex>
     <div className="EditorCode">
       <AceEditor
