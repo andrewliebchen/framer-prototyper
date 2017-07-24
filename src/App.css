@@ -1,18 +1,4 @@
-.Editors {
-  position: fixed;
-  display: flex;
-  bottom: 0;
-  padding-right: 3em;
+.App {
   width: 100vw;
-}
-
-.EditorsAdd {
-  position: absolute;
-  bottom: 0.5em;
-  right: 0.5em;
-}
-
-.Overlays {
-  position: fixed;
-  z-index: 99;
+  height: 100vh;
 }

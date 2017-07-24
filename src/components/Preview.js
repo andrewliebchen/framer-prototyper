@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
 import ReactInterval from 'react-interval';
 import Frame from 'react-frame-component';
@@ -28,16 +27,7 @@ class Preview extends Component {
     this.state = {
       timer: Date.now(),
       playing: false,
-      settings: false,
     };
-  }
-
-  calculateScale() {
-    const windowHeight = window.innerHeight;
-    const maxPreviewHeight = windowHeight * 0.7;
-    const previewScale = maxPreviewHeight / this.props.size.height;
-    
-    return previewScale;
   }
 
   render() {
@@ -49,35 +39,18 @@ class Preview extends Component {
           enabled={this.state.playing}
           callback={() => this.setState({timer: Date.now()})} />
         <div className="PreviewControls">
-          <LinkIcon
-            className="PreviewControl"
-            name="burger" 
-            onClick={this.props.settings}/>
           <LinkIcon 
             className="PreviewControl"
             name={this.state.playing ? 'diamond' : 'triangle'}
             onClick={() => this.setState({ playing: !this.state.playing })}
             right />
         </div>
-        <div 
-          className="PreviewBrowser"
-          style={{ 
-            transform: `translate3d(-50%, -50%, 0) scale(${this.calculateScale()})` 
-          }}>
-          <div className="PreviewBrowserHeader">
-            {_.times(3, (i) => <div key={i} className="PreviewBrowserDot" />)}
-            <span className="PreviewName">{this.props.name}</span>
-          </div>
-          <Frame 
-            key={this.state.timer}
-            className="PreviewFrame" 
-            initialContent={framerContent(this.props.code)}
-            style={{
-              ...this.props.size,
-            }}> 
-            <span/>
-          </Frame>
-        </div>
+        <Frame 
+          key={this.state.timer}
+          className="PreviewFrame" 
+          initialContent={framerContent(this.props.code)}> 
+          <span>hi</span>
+        </Frame>
       </div>
     );
   }
@@ -86,8 +59,6 @@ class Preview extends Component {
 Preview.propTypes = {
   name: PropTypes.string,
   code: PropTypes.string,
-  settings: PropTypes.func,
-  size: PropTypes.object,
 };
 
 export default Preview;
