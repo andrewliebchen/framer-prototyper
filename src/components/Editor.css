@@ -1,4 +1,10 @@
 .EditorHeader {
   background-color: #111;
-  padding: 0 1em;
+  padding: 0 2em 0 1em;
+}
+
+.PlayControl {
+  margin-left: 2em;
+  color: white;
+  cursor: pointer;
 }

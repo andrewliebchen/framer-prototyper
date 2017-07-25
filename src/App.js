@@ -14,7 +14,6 @@ class App extends Component {
     super(props);
     this.state = {
       ...initialState,
-      syntax: 'Coffeescript',
     };
   }
 
@@ -23,13 +22,14 @@ class App extends Component {
       <Provider>
         <Flex className="App">
           <Box auto>
-            <Editor 
+            <Editor
               handleChange={(newCode) => this.setState({ code: newCode })}
-              handleSyntaxChange={(newSyntax) => this.setState({ syntax: newSyntax })} 
+              handleSyntaxChange={(newSyntax) => this.setState({ syntax: newSyntax })}
+              togglePlaying={() => this.setState({ playing: !this.state.playing })}
               {...this.state} />
           </Box>
           <Box auto>
-            <Preview code={this.state.code} /> 
+            <Preview {...this.state} />
           </Box>
         </Flex>
       </Provider>

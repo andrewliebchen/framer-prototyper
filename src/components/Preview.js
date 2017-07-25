@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import ReactInterval from 'react-interval';
 import Frame from 'react-frame-component';
 
-import LinkIcon from './LinkIcon';
-
 import './Preview.css';
 
 const framerContent = (code) => {
@@ -26,7 +24,6 @@ class Preview extends Component {
     super(props);
     this.state = {
       timer: Date.now(),
-      playing: false,
     };
   }
 
@@ -34,31 +31,24 @@ class Preview extends Component {
     // Maybe use shouldComponentUpdate and interval to prevent flashes
     return (
       <div className="Preview">
-        <ReactInterval 
-          timeout={2000} 
-          enabled={this.state.playing}
+        <ReactInterval
+          timeout={2000}
+          enabled={this.props.playing}
           callback={() => this.setState({timer: Date.now()})} />
-        <div className="PreviewControls">
-          <LinkIcon 
-            className="PreviewControl"
-            name={this.state.playing ? 'diamond' : 'triangle'}
-            onClick={() => this.setState({ playing: !this.state.playing })}
-            right />
-        </div>
-        <Frame 
+        <Frame
           key={this.state.timer}
-          className="PreviewFrame" 
-          initialContent={framerContent(this.props.code)}> 
+          className="PreviewFrame"
+          initialContent={framerContent(this.props.code)}>
           <span>hi</span>
         </Frame>
       </div>
     );
   }
-} 
+}
 
 Preview.propTypes = {
-  name: PropTypes.string,
   code: PropTypes.string,
+  playing: PropTypes.bool,
 };
 
 export default Preview;

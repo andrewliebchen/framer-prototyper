@@ -4,4 +4,6 @@ export const initialState = {
   y: Align.center,
   backgroundColor: new Color('blue').alpha(0.5),
 });`,
+  syntax: 'Javascript',
+  playing: false,
 };

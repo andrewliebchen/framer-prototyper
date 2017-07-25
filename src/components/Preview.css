@@ -7,15 +7,3 @@
   height: 100vh;
   width: 50vw;
 }
-
-.PreviewControls {
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  display: flex;
-  z-index: 1;
-}
-
-.PreviewControl {
-  margin-left: 0.25em;
-}

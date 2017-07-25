@@ -3,6 +3,7 @@ import AceEditor from 'react-ace';
 import PropTypes from 'prop-types';
 import { Flex, Box } from 'reflexbox';
 import classnames from 'classnames';
+import { Icon } from 'reline';
 
 import './Editor.css';
 
@@ -12,25 +13,37 @@ import 'brace/theme/monokai';
 const headerHeight = 60;
 const syntaxes = ['Coffeescript', 'Javascript'];
 
-const Editor = (props) => 
+const Editor = (props) =>
   <div className="Editor">
-    <Flex 
+    <Flex
       className="EditorHeader"
       align="center"
       style={{ height: headerHeight }}>
-      <Box className="Toggle">
-        {syntaxes.map((syntax, i) => 
-          <button 
-            key={i}
-            className={classnames({'isActive': props.syntax === syntax})}
-            onClick={() => props.handleSyntaxChange(syntax)}>
-            {syntax}
-          </button>
-        )}
+      <Box>
+        <div className="Logo" />
       </Box>
-      <Box style={{marginLeft: 'auto'}}>
-        <button>Share</button>
-      </Box>
+      <Flex
+        align="center"
+        style={{ marginLeft: 'auto' }}>
+        <Box className="Toggle">
+          {syntaxes.map((syntax, i) =>
+            <button
+              key={i}
+              className={classnames({'isActive': props.syntax === syntax})}
+              onClick={() => props.handleSyntaxChange(syntax)}>
+              {syntax}
+            </button>
+          )}
+        </Box>
+        <Box className="PlayControl">
+          <Icon
+            name={props.playing ? 'diamond' : 'triangle'}
+            right
+            onClick={props.togglePlaying}
+            size={20}
+            strokeWidth={1}/>
+        </Box>
+      </Flex>
     </Flex>
     <div className="EditorCode">
       <AceEditor
@@ -58,6 +71,8 @@ Editor.propTypes = {
   syntax: PropTypes.oneOf(['Coffeescript', 'Javascript']).isRequired,
   handleChange: PropTypes.func,
   handleSyntaxChange: PropTypes.func,
+  togglePlaying: PropTypes.func,
+  playing: PropTypes.bool,
 };
 
 export default Editor;
