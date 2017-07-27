@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "classnames": "^2.2.5",
+    "js2coffee": "^2.2.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react-ace": "^5.1.1",

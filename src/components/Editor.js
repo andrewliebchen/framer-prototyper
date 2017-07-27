@@ -7,6 +7,7 @@ import { Icon } from 'reline';
 
 import './Editor.css';
 
+import 'brace/mode/coffee';
 import 'brace/mode/jsx';
 import 'brace/theme/monokai';
 
@@ -25,6 +26,7 @@ const Editor = (props) =>
       <Flex
         align="center"
         style={{ marginLeft: 'auto' }}>
+        {/* Maybe not the right mechanism? Should be hard to switch back to JS */}
         <Box className="Toggle">
           {syntaxes.map((syntax, i) =>
             <button
@@ -47,7 +49,7 @@ const Editor = (props) =>
     </Flex>
     <div className="EditorCode">
       <AceEditor
-        mode="jsx"
+        mode={props.syntax === 'Coffeescript' ? 'coffee' : 'jsx'}
         theme="monokai"
         name="editorCode"
         value={props.code}
@@ -55,6 +57,7 @@ const Editor = (props) =>
         width="50vw"
         height={`${window.innerHeight - headerHeight}px`}
         tabSize={2}
+        softTabs={false}
         editorProps={{
           $blockScrolling: true
         }}

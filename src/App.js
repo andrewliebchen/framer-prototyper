@@ -8,6 +8,9 @@ import { initialState } from './data';
 
 import './App.css';
 
+// Ugh, why do I have to do this?
+const js2coffee = window.js2coffee;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -16,13 +19,26 @@ class App extends Component {
     };
   }
 
+  handleSyntaxChange(newSyntax) {
+    let newCode = this.state.code;
+    if ( newSyntax === 'Coffeescript' ) {
+      // Have to add in this extra comment for some reason
+      newCode = `# This is coffeescript\n\n${js2coffee.build(this.state.code).code}`;
+    }
+
+    this.setState({
+      syntax: newSyntax,
+      code: newCode,
+    });
+  }
+
   render() {
     return (
       <Flex className="App">
         <Box auto>
           <Editor
             handleChange={(newCode) => this.setState({ code: newCode })}
-            handleSyntaxChange={(newSyntax) => this.setState({ syntax: newSyntax })}
+            handleSyntaxChange={this.handleSyntaxChange.bind(this)}
             togglePlaying={() => this.setState({ playing: !this.state.playing })}
             {...this.state} />
         </Box>
