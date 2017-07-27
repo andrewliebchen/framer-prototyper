@@ -5,19 +5,8 @@ import Frame from 'react-frame-component';
 
 import './Preview.css';
 
-const framerContent = (code) => {
-  return `
-    <!DOCTYPE html>
-    <html>
-      <head>
-        <script src="//builds.framerjs.com/version/latest/framer.js"></script>
-      </head>
-      <body>
-        <script>${code}</script>
-      </body>
-    </html>
-  `;
-}
+const framerURI = '//builds.framerjs.com/version/latest/framer.js';
+const coffeescriptURI = '//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js';
 
 class Preview extends Component {
   constructor(props) {
@@ -28,6 +17,7 @@ class Preview extends Component {
   }
 
   render() {
+    const isCoffeescript = this.props.syntax === 'Coffeescript';
     // Maybe use shouldComponentUpdate and interval to prevent flashes
     return (
       <div className="Preview">
@@ -38,8 +28,20 @@ class Preview extends Component {
         <Frame
           key={this.state.timer}
           className="PreviewFrame"
-          initialContent={framerContent(this.props.code)}>
-          <span>hi</span>
+          initialContent={`
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <script src="${framerURI}"></script>
+              </head>
+              <body>
+                <script ${isCoffeescript && 'type="text/coffeescript"'}>
+                  ${this.props.code}
+                </script>
+                ${isCoffeescript && `<script src="${coffeescriptURI}"></script>`}
+              </body>
+            </html>`}>
+          <span/>
         </Frame>
       </div>
     );
@@ -49,6 +51,7 @@ class Preview extends Component {
 Preview.propTypes = {
   code: PropTypes.string,
   playing: PropTypes.bool,
+  syntax: PropTypes.oneOf(['Coffeescript', 'Javascript']),
 };
 
 export default Preview;
