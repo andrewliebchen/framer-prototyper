@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Provider } from 'rebass';
 import { Flex, Box } from 'reflexbox';
-import slug from 'slugg';
 
 import Editor from './components/Editor';
 import Preview from './components/Preview';
@@ -20,20 +18,18 @@ class App extends Component {
 
   render() {
     return (
-      <Provider>
-        <Flex className="App">
-          <Box auto>
-            <Editor
-              handleChange={(newCode) => this.setState({ code: newCode })}
-              handleSyntaxChange={(newSyntax) => this.setState({ syntax: newSyntax })}
-              togglePlaying={() => this.setState({ playing: !this.state.playing })}
-              {...this.state} />
-          </Box>
-          <Box auto>
-            <Preview {...this.state} />
-          </Box>
-        </Flex>
-      </Provider>
+      <Flex className="App">
+        <Box auto>
+          <Editor
+            handleChange={(newCode) => this.setState({ code: newCode })}
+            handleSyntaxChange={(newSyntax) => this.setState({ syntax: newSyntax })}
+            togglePlaying={() => this.setState({ playing: !this.state.playing })}
+            {...this.state} />
+        </Box>
+        <Box auto>
+          <Preview {...this.state} />
+        </Box>
+      </Flex>
     );
   }
 }
