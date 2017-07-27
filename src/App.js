@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'rebass';
 import { Flex, Box } from 'reflexbox';
+import slug from 'slugg';
 
 import Editor from './components/Editor';
 import Preview from './components/Preview';
