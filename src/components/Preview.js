@@ -18,6 +18,10 @@ class Preview extends Component {
 
   render() {
     const isCoffeescript = this.props.syntax === 'Coffeescript';
+
+    // Not sure why the double return is necessary but...
+    const renderCode = isCoffeescript ? `\n\n${this.props.code}` : this.props.code;
+
     // Maybe use shouldComponentUpdate and interval to prevent flashes
     return (
       <div className="Preview">
@@ -36,7 +40,7 @@ class Preview extends Component {
               </head>
               <body>
                 <script ${isCoffeescript && 'type="text/coffeescript"'}>
-                  ${this.props.code}
+                  ${renderCode}
                 </script>
                 ${isCoffeescript && `<script src="${coffeescriptURI}"></script>`}
               </body>
