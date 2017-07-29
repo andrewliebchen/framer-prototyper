@@ -3,7 +3,7 @@ import AceEditor from "react-ace";
 import PropTypes from "prop-types";
 import { Flex, Box } from "reflexbox";
 import classnames from "classnames";
-import { Icon } from "reline";
+import Icon from "react-geomicons";
 
 import "./Editor.css";
 
@@ -26,7 +26,7 @@ const Editor = props =>
       </Box>
       <Flex align="center" style={{ marginLeft: "auto" }}>
         {/* Maybe not the right mechanism? Should be hard to switch back to JS */}
-        <Box className="Toggle">
+        {/* <Box className="Toggle">
           {syntaxes.map((syntax, i) =>
             <button
               key={i}
@@ -36,14 +36,15 @@ const Editor = props =>
               {syntax}
             </button>
           )}
+        </Box> */}
+        <Box className="Control">
+          <Icon name="cog" size={24} />
         </Box>
-        <Box className="PlayControl">
+        <Box className="Control">
           <Icon
-            name={props.playing ? "diamond" : "triangle"}
-            right
+            name={props.playing ? "pause" : "play"}
             onClick={props.togglePlaying}
-            size={20}
-            strokeWidth={1}
+            size={24}
           />
         </Box>
       </Flex>
@@ -59,6 +60,7 @@ const Editor = props =>
         height={`${window.innerHeight - headerHeight}px`}
         tabSize={2}
         softTabs={false}
+        showInvisibles
         editorProps={{
           $blockScrolling: true
         }}
