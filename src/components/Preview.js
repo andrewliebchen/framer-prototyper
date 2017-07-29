@@ -1,26 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import ReactInterval from 'react-interval';
-import Frame from 'react-frame-component';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import ReactInterval from "react-interval";
+import Frame from "react-frame-component";
 
-import './Preview.css';
+import "./Preview.css";
 
-const framerURI = '//builds.framerjs.com/version/latest/framer.js';
-const coffeescriptURI = '//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js';
+const framerURI = "//builds.framerjs.com/version/latest/framer.js";
+const coffeescriptURI =
+  "//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js";
 
 class Preview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: Date.now(),
+      timer: Date.now()
     };
   }
 
   render() {
-    const isCoffeescript = this.props.syntax === 'Coffeescript';
+    const isCoffeescript = this.props.syntax === "Coffeescript";
 
     // Not sure why the double return is necessary but...
-    const renderCode = isCoffeescript ? `\n\n${this.props.code}` : this.props.code;
+    const renderCode = isCoffeescript
+      ? `\n\n${this.props.code}`
+      : this.props.code;
 
     // Maybe use shouldComponentUpdate and interval to prevent flashes
     return (
@@ -28,7 +31,8 @@ class Preview extends Component {
         <ReactInterval
           timeout={2000}
           enabled={this.props.playing}
-          callback={() => this.setState({timer: Date.now()})} />
+          callback={() => this.setState({ timer: Date.now() })}
+        />
         <Frame
           key={this.state.timer}
           className="PreviewFrame"
@@ -42,10 +46,12 @@ class Preview extends Component {
                 <script ${isCoffeescript && 'type="text/coffeescript"'}>
                   ${renderCode}
                 </script>
-                ${isCoffeescript && `<script src="${coffeescriptURI}"></script>`}
+                ${isCoffeescript &&
+                  `<script src="${coffeescriptURI}"></script>`}
               </body>
-            </html>`}>
-          <span/>
+            </html>`}
+        >
+          <span />
         </Frame>
       </div>
     );
@@ -55,7 +61,7 @@ class Preview extends Component {
 Preview.propTypes = {
   code: PropTypes.string,
   playing: PropTypes.bool,
-  syntax: PropTypes.oneOf(['Coffeescript', 'Javascript']),
+  syntax: PropTypes.oneOf(["Coffeescript", "Javascript"])
 };
 
 export default Preview;
