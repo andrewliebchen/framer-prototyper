@@ -20,14 +20,15 @@ class App extends Component {
     };
   }
 
-  handleSyntaxChange(newSyntax) {
+  handleSyntaxChange() {
     let newCode = this.state.code;
-    if (newSyntax === "Coffeescript") {
+    if (this.state.javascript) {
+      // Currently is JS, need to convert to Coffeescript
       newCode = js2coffee.build(this.state.code).code;
     }
 
     this.setState({
-      syntax: newSyntax,
+      javascript: !this.state.javascript,
       code: newCode
     });
   }
@@ -43,7 +44,6 @@ class App extends Component {
           <Box auto>
             <Editor
               handleChange={newCode => this.setState({ code: newCode })}
-              handleSyntaxChange={this.handleSyntaxChange.bind(this)}
               showSettings={this.toggleSettings.bind(this)}
               togglePlaying={() =>
                 this.setState({ playing: !this.state.playing })}
@@ -61,12 +61,12 @@ class App extends Component {
           title="Settings"
         >
           <Toggle
-            on={this.state.syntax === "Javascript"}
-            onToggle={() => this.setState({ syntax: "Coffeescript" })}
+            on={this.state.javascript}
+            onToggle={this.handleSyntaxChange.bind(this)}
             label="Use plain ole JavaScript"
-            hint="You're going to have to re-write your code in JS. You can convert
-            back to Coffeescript at any time, and the code will convert
-            automatically."
+            hint="You can convert back to Coffeescript at any time, and the code
+            will convert automatically, although right now we can't
+            automatically convert Coffeescript to JS."
           />
         </Modal>
       </div>
