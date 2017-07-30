@@ -13,17 +13,21 @@ const Toggle = props =>
     })}
     onClick={props.onToggle}
   >
-    <Flex align="center">
-      <Box className="Toggle">
-        <div className="ToggleHandle" />
+    <Flex>
+      <Box style={{ flex: "0 0 6em" }}>
+        <div className="Toggle">
+          <div className="ToggleHandle" />
+        </div>
       </Box>
       <Box>
-        {props.label}
+        <div className="ToggleLabel">
+          {props.label}
+        </div>
+        <small className="ToggleHint">
+          {props.hint}
+        </small>
       </Box>
     </Flex>
-    <small className="ToggleHint">
-      {props.hint}
-    </small>
   </div>;
 
 Toggle.propTypes = {

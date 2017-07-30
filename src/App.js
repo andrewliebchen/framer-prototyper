@@ -6,6 +6,7 @@ import Editor from "./components/Editor";
 import Preview from "./components/Preview";
 import Modal from "./components/Modal";
 import Toggle from "./components/Toggle";
+import Input from "./components/Input";
 
 import { initialState } from "./data";
 
@@ -63,11 +64,12 @@ class App extends Component {
           <Toggle
             on={this.state.javascript}
             onToggle={this.handleSyntaxChange.bind(this)}
-            label="Use plain ole JavaScript"
+            label="Use plain JavaScript"
             hint="You can convert back to Coffeescript at any time, and the code
             will convert automatically, although right now we can't
             automatically convert Coffeescript to JS."
           />
+          <Input label="URL" value="http://example.com" disabled />
         </Modal>
       </div>
     );

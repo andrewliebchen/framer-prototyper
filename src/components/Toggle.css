@@ -1,5 +1,5 @@
 .ToggleContainer {
-  margin-bottom: 1em;
+  margin-bottom: 2em;
 }
 
 .Toggle {
@@ -7,7 +7,7 @@
   width: 4em;
   height: 3px;
   background-color: #ccc;
-  margin-right: 1em;
+  margin-top: 1em;
   position: relative;
   cursor: pointer;
 }
@@ -34,6 +34,6 @@
 }
 
 .ToggleHint {
-  padding: 1em 0 0 6em;
   display: block;
+  padding-top: 1em;
 }

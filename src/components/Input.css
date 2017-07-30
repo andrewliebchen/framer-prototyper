@@ -1,0 +1,25 @@
+.Input {
+  margin-bottom: 2em;
+}
+
+.InputLabel {
+  font-size: 14px;
+  width: 4em;
+  margin-right: 1em;
+  display: block;
+  font-weight: bold;
+}
+
+.InputField {
+  font-size: 1em;
+  appearance: none;
+  border: 1px solid black;
+  height: 3em;
+  display: block;
+  padding: 0.5em;
+  width: 100%;
+}
+
+.InputField:disabled {
+  background-color: #f0f0f0;
+}
