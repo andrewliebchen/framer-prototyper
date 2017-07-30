@@ -4,6 +4,8 @@ import js2coffee from "./lib/js2coffee";
 
 import Editor from "./components/Editor";
 import Preview from "./components/Preview";
+import Modal from "./components/Modal";
+import Toggle from "./components/Toggle";
 
 import { initialState } from "./data";
 
@@ -13,7 +15,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ...initialState
+      ...initialState,
+      settings: false
     };
   }
 
@@ -29,22 +32,44 @@ class App extends Component {
     });
   }
 
+  toggleSettings() {
+    this.setState({ settings: !this.state.settings });
+  }
+
   render() {
     return (
-      <Flex className="App">
-        <Box auto>
-          <Editor
-            handleChange={newCode => this.setState({ code: newCode })}
-            handleSyntaxChange={this.handleSyntaxChange.bind(this)}
-            togglePlaying={() =>
-              this.setState({ playing: !this.state.playing })}
-            {...this.state}
+      <div>
+        <Flex className="App Underlay">
+          <Box auto>
+            <Editor
+              handleChange={newCode => this.setState({ code: newCode })}
+              handleSyntaxChange={this.handleSyntaxChange.bind(this)}
+              showSettings={this.toggleSettings.bind(this)}
+              togglePlaying={() =>
+                this.setState({ playing: !this.state.playing })}
+              {...this.state}
+            />
+          </Box>
+          <Box auto>
+            <Preview {...this.state} />
+          </Box>
+        </Flex>
+
+        <Modal
+          show={this.state.settings}
+          toggle={this.toggleSettings.bind(this)}
+          title="Settings"
+        >
+          <Toggle
+            on={this.state.syntax === "Javascript"}
+            onToggle={() => this.setState({ syntax: "Coffeescript" })}
+            label="Use plain ole JavaScript"
+            hint="You're going to have to re-write your code in JS. You can convert
+            back to Coffeescript at any time, and the code will convert
+            automatically."
           />
-        </Box>
-        <Box auto>
-          <Preview {...this.state} />
-        </Box>
-      </Flex>
+        </Modal>
+      </div>
     );
   }
 }

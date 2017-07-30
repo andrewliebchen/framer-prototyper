@@ -2,7 +2,6 @@ import React from "react";
 import AceEditor from "react-ace";
 import PropTypes from "prop-types";
 import { Flex, Box } from "reflexbox";
-import classnames from "classnames";
 import Icon from "react-geomicons";
 
 import "./Editor.css";
@@ -12,7 +11,7 @@ import "brace/mode/jsx";
 import "brace/theme/monokai";
 
 const headerHeight = 60;
-const syntaxes = ["Coffeescript", "Javascript"];
+// const syntaxes = ["Coffeescript", "Javascript"];
 
 const Editor = props =>
   <div className="Editor">
@@ -38,7 +37,7 @@ const Editor = props =>
           )}
         </Box> */}
         <Box className="Control">
-          <Icon name="cog" size={24} />
+          <Icon name="cog" onClick={props.showSettings} size={24} />
         </Box>
         <Box className="Control">
           <Icon
@@ -79,7 +78,8 @@ Editor.propTypes = {
   handleChange: PropTypes.func,
   handleSyntaxChange: PropTypes.func,
   togglePlaying: PropTypes.func,
-  playing: PropTypes.bool
+  playing: PropTypes.bool,
+  showSettings: PropTypes.func
 };
 
 export default Editor;
