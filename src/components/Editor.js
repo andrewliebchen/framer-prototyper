@@ -8,7 +8,7 @@ import "./Editor.css";
 
 import "brace/mode/coffee";
 import "brace/mode/jsx";
-import "brace/theme/monokai";
+import "brace/theme/tomorrow_night_eighties";
 
 const headerHeight = 60;
 
@@ -38,7 +38,7 @@ const Editor = props =>
     <div className="EditorCode">
       <AceEditor
         mode={props.javascript ? "jsx" : "coffee"}
-        theme="monokai"
+        theme="tomorrow_night_eighties"
         name="editorCode"
         value={props.code}
         onChange={event => props.handleChange(event)}
