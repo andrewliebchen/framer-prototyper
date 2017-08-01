@@ -9,8 +9,6 @@ import Modal from "./components/Modal";
 import Toggle from "./components/Toggle";
 import Input from "./components/Input";
 
-import { initialState } from "./data";
-
 import "./App.css";
 
 const initialCode = `layerA = new Layer
