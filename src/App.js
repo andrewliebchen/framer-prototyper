@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Flex, Box } from "reflexbox";
 import js2coffee from "./lib/js2coffee";
+import queryString from "query-string";
 
 import Editor from "./components/Editor";
 import Preview from "./components/Preview";
@@ -15,8 +16,12 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
+
+    const urlParams = queryString.parse(this.props.location.search);
+
     this.state = {
-      ...initialState,
+      code: urlParams.c ? urlParams.c : "",
+      javascript: urlParams.js ? true : false,
       settings: false
     };
   }
@@ -36,6 +41,21 @@ class App extends Component {
 
   toggleSettings() {
     this.setState({ settings: !this.state.settings });
+  }
+
+  _updateURI() {
+    const { javascript, code } = this.state;
+    console.log(code);
+    this.props.history.push({
+      pathname: "/",
+      search: `?js=${javascript}&c=${encodeURI(code)}`
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state !== prevState) {
+      this._updateURI();
+    }
   }
 
   render() {
