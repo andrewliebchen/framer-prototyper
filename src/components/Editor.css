@@ -1,6 +1,14 @@
+.Editor {
+  background-color: #2d2d2d;
+}
+
 .EditorHeader {
   background-color: #111;
   padding: 0 2em 0 1em;
+}
+
+.EditorCode {
+  padding: 1em;
 }
 
 .Control {

@@ -8,7 +8,7 @@ import "./Editor.css";
 
 import "brace/mode/coffee";
 import "brace/mode/jsx";
-import "brace/theme/tomorrow_night_eighties";
+import "../lib/tomorrow_night_eighties";
 
 const headerHeight = 60;
 
@@ -47,6 +47,8 @@ const Editor = props =>
         tabSize={2}
         softTabs={false}
         showInvisibles
+        highlightActiveLine={false}
+        highlightGutterLine={false}
         editorProps={{
           $blockScrolling: true
         }}
