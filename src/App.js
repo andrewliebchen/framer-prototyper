@@ -13,6 +13,11 @@ import { initialState } from "./data";
 
 import "./App.css";
 
+const initialCode = `layerA = new Layer
+  x: Align.center
+  y: Align.center
+  backgroundColor: new Color('blue').alpha(0.5)`;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +25,9 @@ class App extends Component {
     const urlParams = queryString.parse(this.props.location.search);
 
     this.state = {
-      code: urlParams.c ? urlParams.c : "",
-      javascript: urlParams.js ? true : false,
+      code: urlParams.c || initialCode,
+      javascript: urlParams.js || false,
+      playing: false,
       settings: false
     };
   }
@@ -45,7 +51,6 @@ class App extends Component {
 
   _updateURI() {
     const { javascript, code } = this.state;
-    console.log(code);
     this.props.history.push({
       pathname: "/",
       search: `?js=${javascript}&c=${encodeURI(code)}`
