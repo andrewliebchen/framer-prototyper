@@ -21,7 +21,7 @@ const Editor = props =>
       style={{ height: headerHeight }}
     >
       <Box className="Control" data-tip="New Frame">
-        <Icon name="frame" />
+        <Icon name="logo" />
       </Box>
       <Flex align="center" style={{ marginLeft: "auto" }}>
         <Box

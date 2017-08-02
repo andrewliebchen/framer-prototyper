@@ -9,8 +9,8 @@ const renderIcon = name => {
       return "🏃💨";
     case "pause":
       return "✋";
-    case "frame":
-      return "🖼️";
+    case "logo":
+      return "🖼🎉️";
     default:
       return "";
   }

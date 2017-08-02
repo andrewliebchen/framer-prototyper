@@ -23,7 +23,9 @@ class Preview extends Component {
       ? this.props.code
       : `\n\n${this.props.code}`;
 
-    // Maybe use shouldComponentUpdate and interval to prevent flashes
+    // TODO: Maybe use shouldComponentUpdate and interval to prevent flashes
+    // TODO: Refresh on Resize
+
     return (
       <div className="Preview">
         <ReactInterval

@@ -4,6 +4,8 @@ import classNames from "classnames";
 
 import "./Modal.css";
 
+// TODO: Animate this
+
 const Modal = props =>
   <div>
     <div
