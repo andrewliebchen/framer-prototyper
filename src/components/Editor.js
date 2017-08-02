@@ -2,7 +2,8 @@ import React from "react";
 import AceEditor from "react-ace";
 import PropTypes from "prop-types";
 import { Flex, Box } from "reflexbox";
-import Icon from "react-geomicons";
+
+import Icon from "./Icon";
 
 import "./Editor.css";
 
@@ -10,7 +11,7 @@ import "brace/mode/coffee";
 import "brace/mode/jsx";
 import "../lib/tomorrow_night_eighties";
 
-const headerHeight = 60;
+const headerHeight = 80;
 
 const Editor = props =>
   <div className="Editor">
@@ -19,19 +20,18 @@ const Editor = props =>
       align="center"
       style={{ height: headerHeight }}
     >
-      <Box>
-        <div className="Logo" />
+      <Box className="Control">
+        <Icon name="frame" />
       </Box>
       <Flex align="center" style={{ marginLeft: "auto" }}>
-        <Box className="Control">
-          <Icon name="cog" onClick={props.showSettings} size={24} />
+        <Box className="Control" onClick={props.showSettings}>
+          <span className="ControlLabel">
+            {props.javascript ? "Javascript" : "Coffeescript"}
+          </span>
+          <Icon name="cog" />
         </Box>
-        <Box className="Control">
-          <Icon
-            name={props.playing ? "pause" : "play"}
-            onClick={props.togglePlaying}
-            size={24}
-          />
+        <Box className="Control" onClick={props.togglePlaying}>
+          <Icon name={props.playing ? "pause" : "play"} />
         </Box>
       </Flex>
     </Flex>
@@ -55,7 +55,7 @@ const Editor = props =>
         style={{
           fontSize: "16px",
           fontFamily: "SF Mono",
-          lineHeight: "22px"
+          lineHeight: "28px"
         }}
       />
     </div>

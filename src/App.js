@@ -21,17 +21,18 @@ class App extends Component {
     super(props);
 
     const urlParams = queryString.parse(this.props.location.search);
+    console.log(urlParams.js);
 
     this.state = {
       code: urlParams.c || initialCode,
-      javascript: urlParams.js || false,
+      javascript: urlParams.js ? true : false,
       playing: false,
       settings: false
     };
   }
 
   handleSyntaxChange() {
-    let newCode = this.state.code;
+    let newCode = "";
     if (this.state.javascript) {
       // Currently is JS, need to convert to Coffeescript
       newCode = js2coffee.build(this.state.code).code;
@@ -55,6 +56,22 @@ class App extends Component {
     });
   }
 
+  _renderModalContent() {
+    return (
+      <span>
+        <Toggle
+          on={this.state.javascript}
+          onToggle={this.handleSyntaxChange.bind(this)}
+          label="Use plain JavaScript"
+          hint="You can convert back to Coffeescript at any time, and the code
+          will convert automatically, although right now we can't
+          automatically convert Coffeescript to JS."
+        />
+        <Input label="URL" value="http://example.com" disabled />
+      </span>
+    );
+  }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) {
       this._updateURI();
@@ -63,7 +80,12 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Modal
+        show={this.state.settings}
+        toggle={this.toggleSettings.bind(this)}
+        title="Settings"
+        content={this._renderModalContent()}
+      >
         <Flex className="App Underlay">
           <Box auto>
             <Editor
@@ -78,23 +100,7 @@ class App extends Component {
             <Preview {...this.state} />
           </Box>
         </Flex>
-
-        <Modal
-          show={this.state.settings}
-          toggle={this.toggleSettings.bind(this)}
-          title="Settings"
-        >
-          <Toggle
-            on={this.state.javascript}
-            onToggle={this.handleSyntaxChange.bind(this)}
-            label="Use plain JavaScript"
-            hint="You can convert back to Coffeescript at any time, and the code
-            will convert automatically, although right now we can't
-            automatically convert Coffeescript to JS."
-          />
-          <Input label="URL" value="http://example.com" disabled />
-        </Modal>
-      </div>
+      </Modal>
     );
   }
 }

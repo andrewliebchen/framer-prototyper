@@ -4,7 +4,7 @@
 
 .EditorHeader {
   background-color: #111;
-  padding: 0 2em 0 1em;
+  padding: 0 2em;
 }
 
 .EditorCode {
@@ -12,10 +12,38 @@
 }
 
 .Control {
-  margin-left: 1.5em;
-  color: #ccc;
   cursor: pointer;
   height: 24px;
+  background-color: black;
+  height: 3em;
+  min-width: 4em;
+  text-align: center;
+  padding: 0 1em;
+  display: flex;
+  align-items: center;
+  border-radius: 2em;
+  color: #ccc;
+  transition: 0.15s ease-in-out;
+}
+
+.Control + .Control {
+  margin-left: 0.5em;
+}
+
+.Control:hover {
+  box-shadow: 0 0 0 1px #0074d9;
+  color: white;
+  /*background-color: #222;*/
+}
+
+.ControlLabel {
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.Control > .ControlLabel {
+  padding-right: 0.5em;
 }
 
 .Control:hover {

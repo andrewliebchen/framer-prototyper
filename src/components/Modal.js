@@ -1,17 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 
 import "./Modal.css";
 
 const Modal = props =>
   <div>
+    <div
+      className={classNames({
+        Underlay: true,
+        showModal: props.show
+      })}
+    >
+      {props.children}
+    </div>
     {props.show &&
       <div className="ModalContainer">
         <div className="Modal">
           <h2 className="ModalHeader">
             {props.title}
           </h2>
-          {props.children}
+          {props.content}
           <button className="ModalButton" onClick={props.toggle}>
             Done
           </button>

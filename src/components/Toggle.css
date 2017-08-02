@@ -6,6 +6,7 @@
   transition: 0.1s ease-in-out;
   width: 4em;
   height: 3px;
+  border-radius: 3px;
   background-color: #ccc;
   margin-top: 1em;
   position: relative;
