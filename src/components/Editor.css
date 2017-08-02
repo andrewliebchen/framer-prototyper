@@ -1,9 +1,9 @@
 .Editor {
-  background-color: #2d2d2d;
+  background-color: var(--color-gray-2);
 }
 
 .EditorHeader {
-  background-color: #111;
+  background-color: var(--color-gray-1);
   padding: 0 2em;
 }
 
@@ -31,9 +31,8 @@
 }
 
 .Control:hover {
-  box-shadow: 0 0 0 1px #0074d9;
+  box-shadow: 0 0 0 1px var(--color-accent);
   color: white;
-  /*background-color: #222;*/
 }
 
 .ControlLabel {
