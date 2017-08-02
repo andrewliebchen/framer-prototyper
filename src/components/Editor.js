@@ -20,17 +20,25 @@ const Editor = props =>
       align="center"
       style={{ height: headerHeight }}
     >
-      <Box className="Control">
+      <Box className="Control" data-tip="New Frame">
         <Icon name="frame" />
       </Box>
       <Flex align="center" style={{ marginLeft: "auto" }}>
-        <Box className="Control" onClick={props.showSettings}>
+        <Box
+          className="Control"
+          onClick={props.showSettings}
+          data-tip="Settings"
+        >
           <span className="ControlLabel">
             {props.javascript ? "Javascript" : "Coffeescript"}
           </span>
           <Icon name="cog" />
         </Box>
-        <Box className="Control" onClick={props.togglePlaying}>
+        <Box
+          className="Control"
+          onClick={props.togglePlaying}
+          data-tip={props.playing ? "Pause" : "Play"}
+        >
           <Icon name={props.playing ? "pause" : "play"} />
         </Box>
       </Flex>

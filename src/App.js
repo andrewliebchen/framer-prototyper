@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Flex, Box } from "reflexbox";
-import js2coffee from "./lib/js2coffee";
+// import js2coffee from "./lib/js2coffee";
 import queryString from "query-string";
+import ReactTooltip from "react-tooltip";
 
 import Editor from "./components/Editor";
 import Preview from "./components/Preview";
@@ -11,20 +12,26 @@ import Input from "./components/Input";
 
 import "./App.css";
 
-const initialCode = `layerA = new Layer
-  x: Align.center
-  y: Align.center
-  backgroundColor: new Color('blue').alpha(0.5)`;
+const initialCode = {
+  coffeescript: `layerA = new Layer
+    x: Align.center
+    y: Align.center
+    backgroundColor: new Color('blue').alpha(0.5)`,
+  javascript: `const layerA = new Layer({
+    x: Align.center,
+    y: Align.center,
+    backgroundColor: new Color('blue').alpha(0.5),
+  });`
+};
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     const urlParams = queryString.parse(this.props.location.search);
-    console.log(urlParams.js);
 
     this.state = {
-      code: urlParams.c || initialCode,
+      code: urlParams.c || initialCode.coffeescript,
       javascript: urlParams.js ? true : false,
       playing: false,
       settings: false
@@ -32,15 +39,10 @@ class App extends Component {
   }
 
   handleSyntaxChange() {
-    let newCode = "";
-    if (this.state.javascript) {
-      // Currently is JS, need to convert to Coffeescript
-      newCode = js2coffee.build(this.state.code).code;
-    }
-
+    const { javascript } = this.state;
     this.setState({
-      javascript: !this.state.javascript,
-      code: newCode
+      javascript: !javascript,
+      code: initialCode[javascript ? "coffeescript" : "javascript"]
     });
   }
 
@@ -63,9 +65,7 @@ class App extends Component {
           on={this.state.javascript}
           onToggle={this.handleSyntaxChange.bind(this)}
           label="Use plain JavaScript"
-          hint="You can convert back to Coffeescript at any time, and the code
-          will convert automatically, although right now we can't
-          automatically convert Coffeescript to JS."
+          hint="⚠️ When you switch syntaxes, all your current code will be lost!"
         />
         <Input label="URL" value="http://example.com" disabled />
       </span>
@@ -86,6 +86,11 @@ class App extends Component {
         title="Settings"
         content={this._renderModalContent()}
       >
+        <ReactTooltip
+          place="bottom"
+          offset={{ bottom: 10 }}
+          className="Tooltip"
+        />
         <Flex className="App Underlay">
           <Box auto>
             <Editor

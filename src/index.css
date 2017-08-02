@@ -41,3 +41,13 @@ button.isActive {
   color: #111;
   z-index: 1;
 }
+
+.Tooltip {
+  background-color: #0074d9 !important;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.Tooltip::after {
+  border-bottom-color: #0074d9 !important;
+}
