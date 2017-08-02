@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReactInterval from "react-interval";
 import Frame from "react-frame-component";
+import { WindowResizeListener } from "react-window-resize-listener";
 
 import "./Preview.css";
 
@@ -13,8 +14,13 @@ class Preview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      timer: Date.now()
+      renderCount: Date.now()
     };
+    this._reRender = this._reRender.bind(this);
+  }
+
+  _reRender() {
+    this.setState({ renderCount: Date.now() });
   }
 
   render() {
@@ -24,17 +30,17 @@ class Preview extends Component {
       : `\n\n${this.props.code}`;
 
     // TODO: Maybe use shouldComponentUpdate and interval to prevent flashes
-    // TODO: Refresh on Resize
 
     return (
       <div className="Preview">
         <ReactInterval
           timeout={2000}
           enabled={this.props.playing}
-          callback={() => this.setState({ timer: Date.now() })}
+          callback={this._reRender}
         />
+        <WindowResizeListener onResize={windowSize => this._reRender()} />
         <Frame
-          key={this.state.timer}
+          key={this.state.renderCount}
           className="PreviewFrame"
           initialContent={`
             <!DOCTYPE html>

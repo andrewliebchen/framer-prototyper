@@ -20,6 +20,7 @@
     "react-scripts": "1.0.10",
     "react-tooltip": "^3.3.0",
     "react-transition-group": "^2.2.0",
+    "react-window-resize-listener": "^1.1.0",
     "reflexbox": "^3.0.0-0"
   },
   "scripts": {
