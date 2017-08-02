@@ -35,7 +35,7 @@ Icon.defaultProps = {
 };
 
 Icon.propTypes = {
-  name: PropTypes.oneOf(["cog", "pause", "play", "frame"]),
+  name: PropTypes.oneOf(["cog", "pause", "play", "logo"]),
   size: PropTypes.number,
   onClick: PropTypes.func
 };

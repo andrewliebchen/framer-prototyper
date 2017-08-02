@@ -1,23 +1,13 @@
-.ModalContainer {
-  position: fixed;
-  z-index: 9999;
-  height: 100vh;
-  width: 100vw;
-  top: 0;
-  left: 0;
-}
-
 .Modal {
-  position: absolute;
+  position: fixed;
   background-color: white;
   z-index: 1;
   top: 0;
   left: 50%;
-  transform: translate3d(-50%, 0, 0);
-  padding: 1em 2em 2em;
-  min-width: 40vw;
+  padding: 3em 2em 2em;
+  width: 500px;
   border-radius: 0 0 6px 6px;
-  box-shadow: 0 5px 50px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
 }
 
 .ModalHeader {
@@ -31,9 +21,12 @@
 }
 
 .ModalBackground {
-  position: absolute;
+  position: fixed;
   height: 100vh;
   width: 100vw;
+  z-index: 9998;
+  top: 0;
+  left: 0;
 }
 
 .Underlay {

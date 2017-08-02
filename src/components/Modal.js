@@ -1,10 +1,30 @@
 import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
+import Transition from "react-transition-group/Transition";
 
 import "./Modal.css";
 
-// TODO: Animate this
+const duration = 200;
+
+const defaultStyle = {
+  boxShadow: "none",
+  pointerEvents: "none",
+  transform: "translate3d(-50%, -100%, 0)",
+  transition: `${duration}ms ease-out`
+};
+
+const transitionStyles = {
+  entered: {
+    boxShadow: "0 5px 50px rgba(0, 0, 0, 0.3)",
+    opacity: 1,
+    pointerEvents: "all",
+    transform: "translate3d(-50%, -2em, 0)"
+  },
+  exiting: {
+    transition: `${100}ms ease-in`
+  }
+};
 
 const Modal = props =>
   <div>
@@ -16,9 +36,15 @@ const Modal = props =>
     >
       {props.children}
     </div>
-    {props.show &&
-      <div className="ModalContainer">
-        <div className="Modal">
+    <Transition in={props.show} timeout={duration}>
+      {state =>
+        <div
+          className="Modal"
+          style={{
+            ...defaultStyle,
+            ...transitionStyles[state]
+          }}
+        >
           <h2 className="ModalHeader">
             {props.title}
           </h2>
@@ -26,9 +52,9 @@ const Modal = props =>
           <button className="ModalButton" onClick={props.toggle}>
             Done
           </button>
-        </div>
-        <div className="ModalBackground" onClick={props.toggle} />
-      </div>}
+        </div>}
+    </Transition>
+    {props.show && <div className="ModalBackground" onClick={props.toggle} />}
   </div>;
 
 Modal.propTypes = {
