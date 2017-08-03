@@ -11,6 +11,8 @@ const renderIcon = name => {
       return "✋";
     case "logo":
       return "🖼🎉️";
+    case "copy":
+      return "👯";
     default:
       return "";
   }
@@ -35,7 +37,7 @@ Icon.defaultProps = {
 };
 
 Icon.propTypes = {
-  name: PropTypes.oneOf(["cog", "pause", "play", "logo"]),
+  name: PropTypes.oneOf(["cog", "pause", "play", "logo", "copy"]),
   size: PropTypes.number,
   onClick: PropTypes.func
 };

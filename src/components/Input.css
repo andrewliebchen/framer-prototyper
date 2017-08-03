@@ -1,5 +1,6 @@
 .Input {
   margin-bottom: 2em;
+  position: relative;
 }
 
 .InputLabel {
@@ -23,4 +24,21 @@
 
 .InputField:disabled {
   background-color: var(--color-gray-4);
+}
+
+.InputCopy {
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  transform: translate3d(0, -50%, 0);
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gray-4) 50%
+  );
+  cursor: pointer;
+  padding: 0 0.5em 0 3em;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--color-accent);
 }

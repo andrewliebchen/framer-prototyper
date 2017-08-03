@@ -67,7 +67,12 @@ class App extends Component {
           label="Use plain JavaScript"
           hint="⚠️ When you switch syntaxes, all your current code will be lost!"
         />
-        <Input label="URL" value="http://framer.fun/" disabled />
+        <Input
+          label="URL"
+          value={window.location.href}
+          copy={window.location.href}
+          disabled
+        />
       </span>
     );
   }
