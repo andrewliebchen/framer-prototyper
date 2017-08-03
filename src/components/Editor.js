@@ -2,6 +2,7 @@ import React from "react";
 import AceEditor from "react-ace";
 import PropTypes from "prop-types";
 import { Flex, Box } from "reflexbox";
+import { Link } from "react-router-dom";
 
 import Icon from "./Icon";
 
@@ -21,7 +22,9 @@ const Editor = props =>
       style={{ height: headerHeight }}
     >
       <Box className="Control" data-tip="New Frame">
-        <Icon name="logo" />
+        <Link to="/" target="_blank">
+          <Icon name="logo" />
+        </Link>
       </Box>
       <Flex align="center" style={{ marginLeft: "auto" }}>
         <Box
