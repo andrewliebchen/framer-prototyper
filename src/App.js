@@ -83,9 +83,12 @@ class App extends Component {
         return (
           <div>
             <p>
-              🖼 🎉 (pronounced “Framer Fun”) is a great way to create and share
-              small experiments in FramerJS. Want to try out that new idea you
-              had in the shower? Try it here!
+              <span role="img" aria-label="logo">
+                🖼 🎉
+              </span>{" "}
+              (pronounced “Framer Fun”) is a great way to create and share small
+              experiments in FramerJS. Want to try out that new idea you had in
+              the shower? Try it here!
             </p>
             <p>
               As long as you save the URL, you can always come back to it…No
