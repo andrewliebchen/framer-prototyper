@@ -7,12 +7,14 @@
     "react-dom": "^15.6.1"
   },
   "devDependencies": {
+    "capitalize": "^1.0.0",
     "classnames": "^2.2.5",
     "js2coffee": "^2.2.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",
     "react-ace": "^5.1.1",
+    "react-cookies": "^0.1.0",
     "react-copy-to-clipboard": "^5.0.0",
     "react-frame-component": "^1.1.1",
     "react-geomicons": "^2.1.0",

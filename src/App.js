@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Flex, Box } from "reflexbox";
 import queryString from "query-string";
 import ReactTooltip from "react-tooltip";
+import cookie from "react-cookies";
 
 import Editor from "./components/Editor";
 import Preview from "./components/Preview";
@@ -33,7 +34,7 @@ class App extends Component {
       code: urlParams.c || initialCode.coffeescript,
       javascript: urlParams.js === "true" ? true : false,
       playing: true,
-      settings: false
+      modal: false
     };
   }
 
@@ -58,24 +59,53 @@ class App extends Component {
   }
 
   _renderModalContent() {
-    return (
-      <span>
-        <FormButton
-          buttonLabel={`Switch to ${this.state.javascript
-            ? "Coffeescript"
-            : "Javascript"}`}
-          onClick={this.handleSyntaxChange.bind(this)}
-          label="Syntax"
-          hint="⚠️ When you switch syntaxes, all your current code will be lost!"
-        />
-        <FormInput
-          label="URL"
-          value={window.location.href}
-          copy={window.location.href}
-          disabled
-        />
-      </span>
-    );
+    switch (this.state.modal) {
+      case "settings":
+        return (
+          <div>
+            <FormButton
+              buttonLabel={`Switch to ${this.state.javascript
+                ? "Coffeescript"
+                : "Javascript"}`}
+              onClick={this.handleSyntaxChange.bind(this)}
+              label="Syntax"
+              hint="⚠️WARNING⚠️ All your current code will be lost!"
+            />
+            <FormInput
+              label="URL"
+              value={window.location.href}
+              copy={window.location.href}
+              disabled
+            />
+          </div>
+        );
+      case "welcome":
+        return (
+          <div>
+            <p>
+              🖼 🎉 (pronounced “Framer Fun”) is a great way to create and share
+              small experiments in FramerJS. Want to try out that new idea you
+              had in the shower? Try it here!
+            </p>
+            <p>
+              As long as you save the URL, you can always come back to it…No
+              user accounts, no saving!
+            </p>
+            <button
+              className="ModalButton"
+              onClick={() => this.setState({ modal: false })}
+            >
+              Get Started
+            </button>
+          </div>
+        );
+      default:
+        return <div />;
+    }
+  }
+
+  _setWelcomeCookie() {
+    cookie.save("welcomeSeen", "true");
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -84,12 +114,23 @@ class App extends Component {
     }
   }
 
+  componentWillMount() {
+    this.setState({
+      modal: cookie.load("welcomeSeen") ? false : "welcome"
+    });
+  }
+
   render() {
     return (
       <Modal
-        show={this.state.settings}
-        toggle={this.toggleSettings.bind(this)}
-        title="Settings"
+        show={this.state.modal ? true : false}
+        close={() => {
+          if (this.state.modal === "welcome") {
+            this._setWelcomeCookie();
+          }
+          this.setState({ modal: false });
+        }}
+        title={this.state.modal ? this.state.modal : null}
         content={this._renderModalContent()}
       >
         <ReactTooltip
@@ -101,7 +142,7 @@ class App extends Component {
           <Box auto>
             <Editor
               handleChange={newCode => this.setState({ code: newCode })}
-              showSettings={this.toggleSettings.bind(this)}
+              showSettings={() => this.setState({ modal: "settings" })}
               togglePlaying={() =>
                 this.setState({ playing: !this.state.playing })}
               {...this.state}

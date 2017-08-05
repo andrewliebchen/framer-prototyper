@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Transition from "react-transition-group/Transition";
+import capitalize from "capitalize";
 
 import "./Modal.css";
 
@@ -46,20 +47,18 @@ const Modal = props =>
           }}
         >
           <h2 className="ModalHeader">
-            {props.title}
+            {props.title && capitalize(props.title)}
           </h2>
           {props.content}
-          <button className="ModalButton" onClick={props.toggle}>
-            Done
-          </button>
         </div>}
     </Transition>
-    {props.show && <div className="ModalBackground" onClick={props.toggle} />}
+    {props.show && <div className="ModalBackground" onClick={props.close} />}
   </div>;
 
 Modal.propTypes = {
-  show: PropTypes.bool.isRequired,
-  toggle: PropTypes.func,
+  show: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]).isRequired,
+  content: PropTypes.element,
+  close: PropTypes.func,
   title: PropTypes.string
 };
 

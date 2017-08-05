@@ -4,8 +4,8 @@
   z-index: 1;
   top: 0;
   left: 50%;
-  padding: 3em 2em 2em;
-  width: 500px;
+  padding: 3em 2em 0;
+  width: 520px;
   border-radius: 0 0 6px 6px;
   z-index: 9999;
 }
@@ -15,7 +15,7 @@
 }
 
 .ModalButton {
-  margin-top: 3em;
+  margin: 2em 0;
   display: block;
   width: 100%;
 }
