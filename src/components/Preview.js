@@ -23,13 +23,15 @@ class Preview extends Component {
     this.setState({ renderCount: Date.now() });
   }
 
+  shouldComponentUpdate(nextProps) {
+    return this.props !== nextProps;
+  }
+
   render() {
     // Not sure why the double return is necessary but...
     const renderCode = this.props.javascript
       ? this.props.code
       : `\n\n${this.props.code}`;
-
-    // TODO: Maybe use shouldComponentUpdate and interval to prevent flashes
 
     return (
       <div className="Preview">
