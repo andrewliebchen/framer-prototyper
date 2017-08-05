@@ -36,7 +36,7 @@ class Preview extends Component {
     return (
       <div className="Preview">
         <ReactInterval
-          timeout={2000}
+          timeout={1000}
           enabled={this.props.playing}
           callback={this._reRender}
         />

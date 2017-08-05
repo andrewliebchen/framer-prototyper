@@ -37,7 +37,7 @@
 
 .ControlLabel {
   line-height: 1;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--letter-spacing);
   text-transform: uppercase;
 }
 

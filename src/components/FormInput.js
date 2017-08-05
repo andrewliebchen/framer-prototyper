@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { Flex, Box } from "reflexbox";
 import CopyToClipboard from "react-copy-to-clipboard";
 
-import "./Input.css";
+import "./FormInput.css";
 
-class Input extends Component {
+class FormInput extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,15 +15,15 @@ class Input extends Component {
 
   render() {
     return (
-      <Flex className="Input" align="center">
+      <Flex className="Form">
         <Box style={{ flex: "0 0 6em" }}>
-          <label className="InputLabel">
+          <label className="FormLabel">
             {this.props.label}
           </label>
         </Box>
         <Box style={{ flex: "1 1 auto" }}>
           <input
-            className="InputField"
+            className="FormInput"
             type={this.props.type}
             placeholder={this.props.placeholder}
             defaultValue={this.props.defaultValue}
@@ -31,7 +31,7 @@ class Input extends Component {
             disabled={this.props.disabled}
           />
           {this.props.copy &&
-            <div className="InputCopy">
+            <div className="FormCopy">
               <CopyToClipboard
                 text={this.props.copy}
                 onCopy={() => {
@@ -50,11 +50,11 @@ class Input extends Component {
   }
 }
 
-Input.defaultProps = {
+FormInput.defaultProps = {
   type: "text"
 };
 
-Input.propTypes = {
+FormInput.propTypes = {
   label: PropTypes.string,
   type: PropTypes.oneOf(["text", "number"]),
   placeholder: PropTypes.string,
@@ -63,4 +63,4 @@ Input.propTypes = {
   disabled: PropTypes.bool
 };
 
-export default Input;
+export default FormInput;

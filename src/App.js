@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { Flex, Box } from "reflexbox";
-// import js2coffee from "./lib/js2coffee";
 import queryString from "query-string";
 import ReactTooltip from "react-tooltip";
 
 import Editor from "./components/Editor";
 import Preview from "./components/Preview";
 import Modal from "./components/Modal";
-import Toggle from "./components/Toggle";
-import Input from "./components/Input";
+import FormInput from "./components/FormInput";
+import FormButton from "./components/FormButton";
 
 import "./App.css";
 
@@ -32,8 +31,8 @@ class App extends Component {
 
     this.state = {
       code: urlParams.c || initialCode.coffeescript,
-      javascript: urlParams.js ? true : false,
-      playing: false,
+      javascript: urlParams.js === "true" ? true : false,
+      playing: true,
       settings: false
     };
   }
@@ -61,13 +60,15 @@ class App extends Component {
   _renderModalContent() {
     return (
       <span>
-        <Toggle
-          on={this.state.javascript}
-          onToggle={this.handleSyntaxChange.bind(this)}
-          label="Use plain JavaScript"
+        <FormButton
+          buttonLabel={`Switch to ${this.state.javascript
+            ? "Coffeescript"
+            : "Javascript"}`}
+          onClick={this.handleSyntaxChange.bind(this)}
+          label="Syntax"
           hint="⚠️ When you switch syntaxes, all your current code will be lost!"
         />
-        <Input
+        <FormInput
           label="URL"
           value={window.location.href}
           copy={window.location.href}

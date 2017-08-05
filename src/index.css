@@ -5,6 +5,8 @@
   --color-gray-4: #f0f0f0;
 
   --color-accent: #0074d9;
+
+  --letter-spacing: 0.02em;
 }
 
 * {
@@ -19,6 +21,10 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   background-color: var(--color-gray-1);
   color: var(--color-gray-1);
+}
+
+a {
+  text-decoration: none;
 }
 
 button {
@@ -43,7 +49,7 @@ button:hover {
 
 button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px var(--color-accent);
+  box-shadow: 0 0 0 2px white, 0 0 0 3px var(--color-accent);
 }
 
 button.isActive {
@@ -54,7 +60,7 @@ button.isActive {
 
 .Tooltip {
   background-color: var(--color-accent) !important;
-  letter-spacing: 0.02em;
+  letter-spacing: var(--letter-spacing);
   text-transform: uppercase;
 }
 
