@@ -5,20 +5,17 @@ import { Flex, Box } from "reflexbox";
 import "./FormButton.css";
 
 const FormButton = props =>
-  <Flex className="Form">
-    <Box style={{ flex: "0 0 6em" }}>
+  <Flex className="Form" column>
+    <Box>
       <label className="FormLabel">
         {props.label}
       </label>
+      {props.hint}
     </Box>
-    <Box style={{ flex: "1 1 auto" }}>
+    <Box>
       <button className="FormButton" onClick={props.onClick}>
         {props.buttonLabel}
       </button>
-      {props.hint &&
-        <small>
-          {props.hint}
-        </small>}
     </Box>
   </Flex>;
 

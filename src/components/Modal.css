@@ -4,14 +4,14 @@
   z-index: 1;
   top: 0;
   left: 50%;
-  padding: 3em 2em 0;
+  padding: 3em 2em 1em;
   width: 520px;
   border-radius: 0 0 6px 6px;
   z-index: 9999;
 }
 
 .ModalHeader {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
 
 .ModalButton {

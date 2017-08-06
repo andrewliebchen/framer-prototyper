@@ -69,7 +69,12 @@ class App extends Component {
                 : "Javascript"}`}
               onClick={this.handleSyntaxChange.bind(this)}
               label="Syntax"
-              hint="⚠️WARNING⚠️ All your current code will be lost!"
+              hint={
+                <p>
+                  <b>Warning!</b> Switching syntaxes can not be undone. All your
+                  current code will be lost!
+                </p>
+              }
             />
             <FormInput
               label="URL"

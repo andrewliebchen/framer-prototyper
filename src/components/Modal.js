@@ -46,9 +46,8 @@ const Modal = props =>
             ...transitionStyles[state]
           }}
         >
-          <h2 className="ModalHeader">
-            {props.title && capitalize(props.title)}
-          </h2>
+          {props.title &&
+            <h2 className="ModalHeader">capitalize(props.title)}</h2>}
           {props.content}
         </div>}
     </Transition>

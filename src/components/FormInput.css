@@ -1,15 +1,15 @@
 .Form {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   position: relative;
 }
 
 .FormLabel {
   font-size: 14px;
-  width: 4em;
-  margin-right: 1em;
   display: block;
   font-weight: bold;
-  line-height: 3em;
+  margin-bottom: 0.5em;
+  letter-spacing: var(--letter-spacing);
+  text-transform: uppercase;
 }
 
 .FormInput {

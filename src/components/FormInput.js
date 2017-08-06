@@ -15,13 +15,13 @@ class FormInput extends Component {
 
   render() {
     return (
-      <Flex className="Form">
-        <Box style={{ flex: "0 0 6em" }}>
+      <Flex className="Form" column>
+        <Box>
           <label className="FormLabel">
             {this.props.label}
           </label>
         </Box>
-        <Box style={{ flex: "1 1 auto" }}>
+        <Box style={{ position: "relative" }}>
           <input
             className="FormInput"
             type={this.props.type}
