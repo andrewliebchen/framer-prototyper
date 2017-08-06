@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import Transition from "react-transition-group/Transition";
-import capitalize from "capitalize";
 
 import "./Modal.css";
 
@@ -23,7 +22,7 @@ const transitionStyles = {
     transform: "translate3d(-50%, -2em, 0)"
   },
   exiting: {
-    transition: `${100}ms ease-in`
+    transition: `100ms ease-in`
   }
 };
 
@@ -46,8 +45,6 @@ const Modal = props =>
             ...transitionStyles[state]
           }}
         >
-          {props.title &&
-            <h2 className="ModalHeader">capitalize(props.title)}</h2>}
           {props.content}
         </div>}
     </Transition>

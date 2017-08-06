@@ -3,12 +3,27 @@ import PropTypes from "prop-types";
 import ReactInterval from "react-interval";
 import Frame from "react-frame-component";
 import { WindowResizeListener } from "react-window-resize-listener";
+import { Flex, Box } from "reflexbox";
+import Transition from "react-transition-group/Transition";
 
 import "./Preview.css";
 
 const framerURI = "//builds.framerjs.com/version/latest/framer.js";
 const coffeescriptURI =
   "//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js";
+
+const duration = 100;
+
+const defaultStyle = {
+  transform: "translateY(-100%)",
+  transition: `${duration}ms cubic-bezier(0.445,  0.050, 0.550, 0.950)`
+};
+
+const transitionStyles = {
+  entered: {
+    transform: "translateY(0%)"
+  }
+};
 
 class Preview extends Component {
   constructor(props) {
@@ -33,6 +48,8 @@ class Preview extends Component {
       ? this.props.code
       : `\n\n${this.props.code}`;
 
+    console.log(!this.props.playing);
+
     return (
       <div className="Preview">
         <ReactInterval
@@ -41,6 +58,20 @@ class Preview extends Component {
           callback={this._reRender}
         />
         <WindowResizeListener onResize={windowSize => this._reRender()} />
+        <Transition in={!this.props.playing} timeout={duration}>
+          {state =>
+            <Flex
+              className="PreviewBanner"
+              align="center"
+              justify="center"
+              style={{
+                ...defaultStyle,
+                ...transitionStyles[state]
+              }}
+            >
+              <Box>Reload is paused</Box>
+            </Flex>}
+        </Transition>
         <Frame
           key={this.state.renderCount}
           className="PreviewFrame"
