@@ -78,18 +78,17 @@ class Preview extends Component {
             <html>
               <head>
                 <script src="${framerURI}"></script>
-              </head>
-              <body>
                 <script ${!this.props.javascript && 'type="text/coffeescript"'}>
                   ${renderCode}
                 </script>
                 ${!this.props.javascript &&
                   `<script src="${coffeescriptURI}"></script>`}
+              </head>
+              <body>
+                <div></div>
               </body>
             </html>`}
-        >
-          <span />
-        </Frame>
+        />
       </div>
     );
   }
