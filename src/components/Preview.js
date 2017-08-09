@@ -48,8 +48,6 @@ class Preview extends Component {
       ? this.props.code
       : `\n\n${this.props.code}`;
 
-    console.log(!this.props.playing);
-
     return (
       <div className="Preview">
         <ReactInterval
