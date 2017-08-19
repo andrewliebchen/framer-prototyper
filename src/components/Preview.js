@@ -83,9 +83,22 @@ class Preview extends Component {
                 </script>
                 ${!this.props.javascript &&
                   `<script src="${coffeescriptURI}"></script>`}
+
+                <style>
+                  body {
+                    height: 100vh;
+                    width: 100vw;
+                    margin: 0;
+                    position: relative;
+                  }
+
+                  .framerContext {
+                    height: 100vh;
+                    width: 100vw;
+                  }
+                </style>
               </head>
               <body>
-                <div></div>
               </body>
             </html>`}
         />

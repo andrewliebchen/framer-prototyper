@@ -71,8 +71,8 @@ class App extends Component {
               label="Syntax"
               hint={
                 <p>
-                  <b>Warning!</b> Switching syntaxes can not be undone. All your
-                  current code will be lost!
+                  <b>Warning!</b> Switching syntaxes will reset your current
+                  work. This can not be undone!
                 </p>
               }
             />
@@ -123,9 +123,12 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.setState({
-      modal: cookie.load("welcomeSeen") ? false : "welcome"
-    });
+    // this.setState({
+    //   modal: cookie.load("welcomeSeen") ? false : "welcome"
+    // });
+
+    // Don't do the cookie, doesn't seem to work
+    this.setState({ modal: false });
   }
 
   render() {
