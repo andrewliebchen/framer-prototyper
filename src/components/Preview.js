@@ -57,7 +57,7 @@ class Preview extends Component {
         />
         <WindowResizeListener onResize={windowSize => this._reRender()} />
         <Transition in={!this.props.playing} timeout={duration}>
-          {state =>
+          {state => (
             <Flex
               className="PreviewBanner"
               align="center"
@@ -68,22 +68,15 @@ class Preview extends Component {
               }}
             >
               <Box>Reload is paused</Box>
-            </Flex>}
+            </Flex>
+          )}
         </Transition>
         <Frame
-          key={this.state.renderCount}
           className="PreviewFrame"
           initialContent={`
             <!DOCTYPE html>
             <html>
               <head>
-                <script src="${framerURI}"></script>
-                <script ${!this.props.javascript && 'type="text/coffeescript"'}>
-                  ${renderCode}
-                </script>
-                ${!this.props.javascript &&
-                  `<script src="${coffeescriptURI}"></script>`}
-
                 <style>
                   body {
                     height: 100vh;
@@ -99,7 +92,12 @@ class Preview extends Component {
                 </style>
               </head>
               <body>
-                <div>Loading...</div>
+                <script src="${framerURI}"></script>
+                <script ${!this.props.javascript && 'type="text/coffeescript"'}>
+                  ${renderCode}
+                </script>
+                ${!this.props.javascript &&
+                  `<script src="${coffeescriptURI}"></script>`}
               </body>
             </html>`}
         />
