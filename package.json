@@ -2,22 +2,24 @@
   "name": "framer-prototyper",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "serve": "^6.0.6"
+  "author": "Andrew Liebchen <andrewliebchen@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andrewliebchen/framer-prototyper"
   },
-  "devDependencies": {
-    "capitalize": "^1.0.0",
+  "bugs": {
+    "url": "https://github.com/andrewliebchen/framer-prototyper/issues"
+  },
+  "dependencies": {
     "classnames": "^2.2.5",
-    "js2coffee": "^2.2.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",
     "react-ace": "^5.1.1",
     "react-copy-to-clipboard": "^5.0.0",
+    "react-dom": "^15.6.1",
     "react-frame-component": "^1.1.1",
-    "react-geomicons": "^2.1.0",
     "react-helmet": "^5.2.0",
     "react-interval": "^2.0.1",
     "react-router-dom": "^4.1.2",
@@ -25,7 +27,9 @@
     "react-tooltip": "^3.3.0",
     "react-transition-group": "^2.2.0",
     "react-window-resize-listener": "^1.1.0",
-    "reflexbox": "^3.0.0-0"
+    "react": "^15.6.1",
+    "reflexbox": "^3.0.0-0",
+    "serve": "^6.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
