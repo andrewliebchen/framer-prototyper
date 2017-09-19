@@ -99,6 +99,7 @@ class Preview extends Component {
                 </style>
               </head>
               <body>
+                <div>Loading...</div>
               </body>
             </html>`}
         />
