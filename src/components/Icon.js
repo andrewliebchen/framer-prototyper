@@ -18,7 +18,7 @@ const renderIcon = name => {
   }
 };
 
-const Icon = props =>
+const Icon = props => (
   <div
     className="Icon"
     style={{
@@ -30,7 +30,8 @@ const Icon = props =>
     {...props}
   >
     {renderIcon(props.name)}
-  </div>;
+  </div>
+);
 
 Icon.defaultProps = {
   size: 30

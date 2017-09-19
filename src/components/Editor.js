@@ -14,7 +14,7 @@ import "../lib/tomorrow_night_eighties";
 
 const headerHeight = 80;
 
-const Editor = props =>
+const Editor = props => (
   <div className="Editor">
     <Flex
       className="EditorHeader"
@@ -70,7 +70,8 @@ const Editor = props =>
         }}
       />
     </div>
-  </div>;
+  </div>
+);
 
 Editor.propTypes = {
   code: PropTypes.string.isRequired,
