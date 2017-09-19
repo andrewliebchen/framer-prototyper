@@ -72,6 +72,7 @@ class Preview extends Component {
           )}
         </Transition>
         <Frame
+          key={this.state.renderCount}
           className="PreviewFrame"
           initialContent={`
             <!DOCTYPE html>

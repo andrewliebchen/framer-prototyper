@@ -65,7 +65,6 @@ const Editor = props => (
         }}
         style={{
           fontSize: "16px",
-          fontFamily: "SF Mono",
           lineHeight: "28px"
         }}
       />
